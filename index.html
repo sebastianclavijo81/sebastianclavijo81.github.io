@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastian Clavijo — Analista de Datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14241f;
+    --paper: #f6f3ec;
+    --moss: #2f5d50;
+    --moss-deep: #1d3a32;
+    --clay: #c1622d;
+    --line: rgba(20, 36, 31, 0.14);
+    --muted: rgba(20, 36, 31, 0.62);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246, 243, 236, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .nav-mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--moss); }
+
+  /* ===== HERO ===== */
+  header.hero {
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--clay);
+  }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 68px);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    max-width: 780px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--moss);
+  }
+  .hero-sub {
+    margin-top: 28px;
+    max-width: 560px;
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .hero-meta {
+    margin-top: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .hero-meta a { border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: border-color .2s, color .2s; }
+  .hero-meta a:hover { color: var(--moss); border-color: var(--moss); }
+
+  /* signature stratum element */
+  .stratum {
+    position: absolute;
+    right: -120px;
+    top: 40px;
+    width: 420px;
+    height: 420px;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .stratum svg { width: 100%; height: 100%; }
+
+  /* ===== SECTION LABELS ===== */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 18px;
+  }
+
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-grid p { color: var(--ink); font-size: 16px; margin-bottom: 16px; max-width: 52ch; }
+  .about-grid p strong { font-weight: 500; color: var(--moss-deep); }
+
+  .stack-list { list-style: none; }
+  .stack-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .stack-list li:first-child { padding-top: 0; }
+  .stack-name { font-weight: 500; }
+  .stack-level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ===== PROJECTS ===== */
+  .project {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 28px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .project:last-child { border-bottom: none; padding-bottom: 0; }
+  .project:first-of-type { padding-top: 0; }
+
+  .project-index {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--clay);
+    padding-top: 4px;
+  }
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--moss-deep);
+    background: rgba(47, 93, 80, 0.1);
+    border: 1px solid rgba(47, 93, 80, 0.2);
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .project-body p { font-size: 15px; color: var(--muted); margin-bottom: 14px; max-width: 62ch; }
+  .project-body strong { color: var(--ink); font-weight: 500; }
+
+  .findings {
+    margin: 18px 0 20px;
+    padding: 18px 20px;
+    background: rgba(47, 93, 80, 0.06);
+    border-left: 2px solid var(--moss);
+    font-size: 14px;
+  }
+  .findings .f-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--moss);
+    margin-bottom: 8px;
+  }
+  .findings ul { padding-left: 18px; color: var(--ink); }
+  .findings li { margin-bottom: 5px; }
+
+  .project-links { display: flex; gap: 18px; margin-top: 6px; }
+  .project-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--moss-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .project-links a:hover { border-color: var(--moss-deep); }
+
+  /* ===== EXPERIENCE ===== */
+  .exp-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .exp-row:last-child { border-bottom: none; }
+  .exp-row:first-child { padding-top: 0; }
+  .exp-dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .exp-role { font-weight: 500; font-size: 15.5px; margin-bottom: 2px; }
+  .exp-company { font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+  .exp-desc { font-size: 14px; color: var(--ink); max-width: 56ch; }
+
+  /* ===== CONTACT / FOOTER ===== */
+  .contact-block {
+    text-align: left;
+  }
+  .contact-block h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    max-width: 600px;
+    margin-bottom: 26px;
+  }
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .contact-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    border: 1px solid var(--ink);
+    padding: 11px 20px;
+    border-radius: 100px;
+    transition: background .2s, color .2s;
+  }
+  .contact-pill:hover { background: var(--ink); color: var(--paper); }
+
+  footer {
+    padding: 32px 0 48px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .project { grid-template-columns: 1fr; }
+    .project-index { display: none; }
+    .exp-row { grid-template-columns: 1fr; gap: 6px; }
+    .stratum { display: none; }
+    .nav-links { gap: 18px; }
+    footer { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-mark">S. CLAVIJO</span>
+    <div class="nav-links">
+      <a href="#about">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Analista de datos en formación</div>
+    <h1>Convierto datos<br>en <em>decisiones</em> con<br>sentido de negocio.</h1>
+    <p class="hero-sub">
+      Sebastian Clavijo — de operaciones y administración a análisis de datos.
+      Cursando el bootcamp de TripleTen, aplicando SQL y Python a problemas reales de negocio.
+    </p>
+    <div class="hero-meta">
+      <span>Ciudad de México</span>
+      <a href="https://www.linkedin.com/in/sebastian-clavijo-freyle-20702212b" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/sebastianclavijo81" target="_blank">GitHub ↗</a>
+      <a href="mailto:sebastianclavijo81@gmail.com">Email ↗</a>
+    </div>
+  </div>
+
+  <div class="stratum" aria-hidden="true">
+    <svg viewBox="0 0 420 420" fill="none">
+      <path d="M30 320 Q 110 280 190 300 T 390 270" stroke="#2f5d50" stroke-width="1.4" opacity="0.5"/>
+      <path d="M20 250 Q 120 210 210 235 T 400 200" stroke="#c1622d" stroke-width="1.4" opacity="0.45"/>
+      <path d="M40 180 Q 130 150 220 170 T 410 140" stroke="#2f5d50" stroke-width="1.4" opacity="0.35"/>
+      <path d="M10 120 Q 110 95 200 110 T 380 85" stroke="#14241f" stroke-width="1.2" opacity="0.25"/>
+      <circle cx="320" cy="210" r="3.5" fill="#c1622d"/>
+      <circle cx="160" cy="260" r="3.5" fill="#2f5d50"/>
+      <circle cx="250" cy="150" r="3.5" fill="#2f5d50"/>
+    </svg>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">001 — Sobre mí</div>
+    <div class="about-grid">
+      <div>
+        <p>
+          Vengo de la operación, no de la teoría. Pasé años gestionando procesos administrativos,
+          coordinando equipos y resolviendo problemas de mercadotecnia con datos incompletos y
+          plazos cortos. <strong>Hoy estoy convirtiendo esa intuición de negocio en habilidad técnica</strong>,
+          aprendiendo a hacerle preguntas precisas a los datos en lugar de solo reaccionar a ellos.
+        </p>
+        <p>
+          Estoy cursando el bootcamp de Análisis de Datos de TripleTen, donde trabajo con SQL y Python
+          sobre datasets reales: embudos de conversión, retención de usuarios, movilidad urbana y
+          economía. Lo que más me interesa es el punto donde el análisis se convierte en una
+          recomendación que alguien puede usar para decidir algo.
+        </p>
+        <p>
+          Originario de Colombia, radicado en Ciudad de México. Disponible para reubicación.
+        </p>
+      </div>
+      <div>
+        <ul class="stack-list">
+          <li><span class="stack-name">SQL</span><span class="stack-level">Intermedio</span></li>
+          <li><span class="stack-name">Python</span><span class="stack-level">Básico–Intermedio</span></li>
+          <li><span class="stack-name">Pandas / NumPy</span><span class="stack-level">Básico–Intermedio</span></li>
+          <li><span class="stack-name">Matplotlib / Seaborn</span><span class="stack-level">Básico</span></li>
+          <li><span class="stack-name">Jupyter Notebook</span><span class="stack-level">Intermedio</span></li>
+          <li><span class="stack-name">Google Sheets / Excel</span><span class="stack-level">Intermedio</span></li>
+          <li><span class="stack-name">Inglés</span><span class="stack-level">Intermedio</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="section-label">002 — Proyectos</div>
+
+    <div class="project">
+      <div class="project-index">01</div>
+      <div class="project-body">
+        <div class="project-title">Embudo de conversión y retención — MercadoLibre</div>
+        <div class="project-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">CTEs</span>
+          <span class="tag">Análisis de cohortes</span>
+        </div>
+        <p>
+          Construí el embudo completo de compra de MercadoLibre en 7 etapas —desde la primera
+          visita hasta la compra— usando CTEs encadenados en SQL, y medí la retención de usuarios
+          por cohorte mensual (D7, D14, D21, D28) segmentada por país.
+        </p>
+        <div class="findings">
+          <div class="f-label">Hallazgo clave</div>
+          <ul>
+            <li>La mayor fuga de usuarios ocurre entre <strong>ver un producto</strong> y <strong>agregarlo al carrito</strong>: de 76.9% a 11%, una pérdida de 66 puntos.</li>
+            <li>La retención cae de forma drástica entre el día 7 y el día 14 en todos los países analizados.</li>
+            <li>Uruguay lidera en conversión final (4.55%); tres países terminan en 0% de compras completadas.</li>
+          </ul>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sebastianclavijo81" target="_blank">Ver consultas SQL ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-index">02</div>
+      <div class="project-body">
+        <div class="project-title">Movilidad urbana y productividad económica</div>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Visualización</span>
+        </div>
+        <p>
+          Combiné datos de tráfico en tiempo real (TomTom Traffic Index) con indicadores económicos
+          de la OECD para ciudades del mundo, limpiando, transformando y uniendo ambas fuentes en
+          Python para responder una pregunta de negocio: ¿dónde invertir en infraestructura de
+          transporte?
+        </p>
+        <div class="findings">
+          <div class="f-label">Hallazgo clave</div>
+          <ul>
+            <li>No existe una relación lineal clara entre congestión vehicular y PIB per cápita.</li>
+            <li>Bogotá combina alta congestión con productividad económica relativamente baja — ciudad prioritaria para inversión.</li>
+            <li>Ciudades con mejor infraestructura mantienen tráfico moderado pese a mayor desarrollo económico.</li>
+          </ul>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sebastianclavijo81" target="_blank">Ver notebook ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap">
+    <div class="section-label">003 — Experiencia</div>
+
+    <div class="exp-row">
+      <div class="exp-dates">2024 — 2025</div>
+      <div>
+        <div class="exp-role">Operador de Montacargas y Auxiliar General</div>
+        <div class="exp-company">JRG Comercial Mérida — Mérida, México</div>
+        <div class="exp-desc">Operación de montacargas para carga, descarga y traslado de materiales en centro de reciclaje. Apoyo en organización de almacén y clasificación de materiales.</div>
+      </div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-dates">2015 — 2024</div>
+      <div>
+        <div class="exp-role">Auxiliar Administrativo y Mercadotecnia</div>
+        <div class="exp-company">Grupo Sol4IT S.C. — Ciudad de México, México</div>
+        <div class="exp-desc">Gestión de procesos administrativos, coordinación de equipos y seguimiento de indicadores de desempeño. Soporte en estrategias de mercadotecnia digital y manejo de bases de datos de clientes.</div>
+      </div>
+    </div>
+
+    <div class="exp-row">
+      <div class="exp-dates">2012 — 2014</div>
+      <div>
+        <div class="exp-role">Auxiliar Administrativo</div>
+        <div class="exp-company">ITAvalon Ltda. — Bogotá, Colombia</div>
+        <div class="exp-desc">Apoyo en procesos administrativos, coordinación de actividades internas y elaboración de reportes de seguimiento operativo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="section-label">004 — Contacto</div>
+    <div class="contact-block">
+      <h2>¿Buscas a alguien que lea los datos antes de tomar la decisión?</h2>
+      <div class="contact-links">
+        <a class="contact-pill" href="mailto:sebastianclavijo81@gmail.com">sebastianclavijo81@gmail.com</a>
+        <a class="contact-pill" href="https://www.linkedin.com/in/sebastian-clavijo-freyle-20702212b" target="_blank">LinkedIn</a>
+        <a class="contact-pill" href="https://github.com/sebastianclavijo81" target="_blank">GitHub</a>
+        <a class="contact-pill" href="tel:+529999069134">+52 999 906 9134</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Sebastian Clavijo Freyle</span>
+    <span>Ciudad de México, 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
